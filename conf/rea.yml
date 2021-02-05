@@ -1,0 +1,35 @@
+type: window # single|window, maybe add opt
+key: model #added to the csv names
+evaluation: evaluation #evaluation|evaluation_last|evaluation_multiple
+data:
+  name: retailrocket #added in the end of the csv names
+  folder: data/retailrocket/slices/
+  prefix: events
+  slices: 5 #only window
+  skip: [] #only window
+  opts: {sessions_test: 100000000}
+
+results:
+  folder: results/next/retail/
+
+metrics:
+- class: accuracy.HitRate
+  length: [20]
+- class: accuracy.MRR
+  length: [20]
+
+
+algorithms:
+- class: emde.model.EMDE
+  params: {dataset: retailrocket, alpha: 0.9, W: 0.01, bs: 256, lr: 0.004, gamma: 0.5, n_sketches: 10, 
+          sketch_dim: 128, hidden_size: 2986, num_epochs: 5,
+          slice_absolute_codes_filenames: ['data/retailrocket/codes/slices/SessionId_iter2_dim1024',
+                                          'data/retailrocket/codes/slices/SessionId_iter4_dim1024',
+                                          'data/retailrocket/codes/slices/UserId_iter3_dim1024'],
+          master_data_absolute_codes_filenames: ['data/retailrocket/codes/mm/property_6',
+                                                'data/retailrocket/codes/mm/property_776',
+                                                'data/retailrocket/codes/mm/property_839',
+                                                'data/retailrocket/codes/mm/random'],
+          evaluate_from_dataLoader: True
+  }
+  key: emde
