@@ -1,6 +1,9 @@
-# How to run EMDE model within session-rec framework
+
+This repository is based on `session-rec` framework: https://github.com/rn5l/session-rec
+
+# How to run EMDE model within `session-rec` framework
 Before running this code, be sure to install EMDE as package:
-1. `cd` to `emde` directory (outside of `emde-session-rec` directory)
+1. Go to our EMDE repository: https://github.com/anonymous-kdd2021/emde
 2. Run installation:
 ```
 pip install --editable ./
